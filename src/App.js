@@ -22,7 +22,8 @@ function App() {
         setTasks(tasks => [
           ...tasks,
           {
-            id: newTaskId.id,
+            // arrumar id
+            id: 11,
             title: "",
             description: "",
             urgency: "",
@@ -75,7 +76,24 @@ function App() {
     }
 
     function saveTasks(tasks) {
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        // localStorage.setItem("tasks", JSON.stringify(tasks));
+
+        for (const task of tasks) {
+          axios.post('http://localhost:3000/lists', {
+            // verificar e corrigir erro do id
+            id: task.id,
+            title: task.title
+          }).then(response => {
+            console.log(response);
+          })
+
+          axios.post('http://localhost:3000/tasks', {
+            listId: task.id,
+            title: task.description
+          }).then(response => {
+            console.log(response);
+          })
+        }
     }
 
     function loadTasks() {
@@ -83,9 +101,12 @@ function App() {
 
         let tasks = JSON.parse(loadedTasks);
 
-        axios.get('http://localhost:3000/lists').then(response => {
-          console.log(response);
-        })
+        // axios.get('http://localhost:3000/lists').then(response => {
+        //   response.data.map(item => {
+        //     console.log(item);
+        //     // setTasks(item);
+        //   })
+        // })
 
         if (tasks) {
           setTasks(tasks);
