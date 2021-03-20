@@ -23,7 +23,7 @@ function App() {
           ...tasks,
           {
             // arrumar id
-            id: 11,
+            id: 10,
             title: "",
             description: "",
             urgency: "",
@@ -42,18 +42,19 @@ function App() {
         setTasks(newTaskList);
 
         // alterar para salver no db.json
-        saveTasks(newTaskList);
+        // saveTasks(newTaskList);
     }
 
     function deleteTask(taskId) {
         let filteredTasks = tasks.filter(task => {
           return task.id !== taskId;
         })
-
+        
         setTasks(filteredTasks);
 
-        // alterar para deletar no db.json
-        saveTasks(filteredTasks);
+        // // alterar para deletar no db.json
+        deleteTasks(taskId);
+        // saveTasks(filteredTasks);
     }
 
     function moveTask(id, newStatus) {
@@ -96,17 +97,17 @@ function App() {
         }
     }
 
+    function deleteTasks(tasksId) {
+      axios.delete(`http://localhost:3000/lists/${tasksId}`).then(response => {
+        console.log(response);
+      })
+    }
+
+
     function loadTasks() {
         let loadedTasks = localStorage.getItem("tasks");
 
         let tasks = JSON.parse(loadedTasks);
-
-        // axios.get('http://localhost:3000/lists').then(response => {
-        //   response.data.map(item => {
-        //     console.log(item);
-        //     // setTasks(item);
-        //   })
-        // })
 
         if (tasks) {
           setTasks(tasks);
