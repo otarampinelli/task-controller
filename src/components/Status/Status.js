@@ -37,9 +37,11 @@ export default function Status(props) {
       <h3>{status}</h3>
       {taskList}
       <div className="TaskButton">
-        <button onClick={handleAddEmpty} className="btn mt-2 btn-primary button AddTask">
-          Add
-        </button>
+        <div className="NewTaskButton">
+          <button onClick={handleAddEmpty} className="btn mt-2 btn-primary button AddTask">
+            New Task
+          </button>
+        </div>
       </div>
     </div>
   );

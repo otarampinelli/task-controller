@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import './style.css';
+
 export default function Task(props) {
   const { addTask, deleteTask, moveTask, task } = props;
 
@@ -89,73 +91,79 @@ export default function Task(props) {
           defaultValue={task.description}
         />
       </div>
-        <div className="form-check form-check-inline urgencyLabels">
-            <label className={`low ${urgencyLevel === "low" ? "selected" : ""}`}>
-              <input
-                className="form-check-input"
-                urgency="low"
-                onChange={setUrgency}
-                type="radio"
-                name="urgency"
-              />
-              low
-            </label>
+        <div className="container TaskButtons">
+          <div className="Status">
+            <div className="form-check form-check-inline UrgencyLabels">
+              <label className={`low ${urgencyLevel === "low" ? "selected" : ""}`}>
+                <input
+                  className="form-check-input"
+                  urgency="low"
+                  onChange={setUrgency}
+                  type="radio"
+                  name="urgency"
+                />
+                low
+              </label>
+            </div>
+            <div className="form-check form-check-inline UrgencyLabels">
+              <label
+                className={`medium ${urgencyLevel === "medium" ? "selected" : ""}`}
+              >
+                <input
+                  className="form-check-input"
+                  urgency="medium"
+                  onChange={setUrgency}
+                  type="radio"
+                  name="urgency"
+                />
+                medium
+              </label>
+              </div>
+            <div className="form-check form-check-inline UrgencyLabels">
+              <label
+                className={`high ${urgencyLevel === "high" ? "selected" : ""}`}
+              >
+                <input
+                  className="form-check-input"
+                  urgency="high"
+                  onChange={setUrgency}
+                  type="radio"
+                  name="urgency"
+                />
+                high
+              </label>
+            </div>
           </div>
-          <div className="form-check form-check-inline urgencyLabels">
-            <label
-              className={`medium ${urgencyLevel === "medium" ? "selected" : ""}`}
-            >
-              <input
-                className="form-check-input"
-                urgency="medium"
-                onChange={setUrgency}
-                type="radio"
-                name="urgency"
-              />
-              medium
-            </label>
-          </div>
-          <div className="form-check form-check-inline urgencyLabels">
-            <label
-              className={`high ${urgencyLevel === "high" ? "selected" : ""}`}
-            >
-              <input
-                className="form-check-input"
-                urgency="high"
-                onChange={setUrgency}
-                type="radio"
-                name="urgency"
-              />
-              high
-            </label>
-        </div>
-        <div className="form-group">
-          <button onClick={handleMoveLeft} className="button moveTask">
-            &#171;
-          </button>
-          <button onClick={handleMoveRight} className="button moveTask">
-            &#187;
-          </button>
-        </div>
-        <div className="form-group">
-          <button
-            onClick={() => {
-              setFormAction("save");
-            }}
-            className="btn btn-primary button mr-1"
-          >
-            {collapsed ? "Edit" : "Save"}
-          </button>
-          {collapsed && (
-            <button
-              onClick={() => {
-                setFormAction("delete");
-              }}
-              className="btn btn-danger button delete"
-            >
-              X
+          <div className="ButtonMove">
+            <button onClick={handleMoveLeft} className="btn btn-light MoveTask mr-1">
+              &#171;
             </button>
-          )}
+            <button onClick={handleMoveRight} className="btn btn-light MoveTask ml-1">
+              &#187;
+            </button>
+          </div>
+          <div className="ButtonSave">
+            <div className="form-group">
+              <button
+                onClick={() => {
+                  setFormAction("save");
+                }}
+                className="btn btn-primary mt-2"
+              >
+                {collapsed ? "Edit" : "Save Task"}
+              </button>
+              {collapsed && (
+                <button
+                  onClick={() => {
+                    setFormAction("delete");
+                  }}
+                  className="btn btn-danger mt-2 ml-1"
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </form>
     </div>

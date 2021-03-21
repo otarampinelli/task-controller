@@ -24,8 +24,7 @@ function App() {
         setTasks(tasks => [
           ...tasks,
           {
-            // arrumar id
-            id: 10,
+            id: newTaskId.id,
             title: "",
             description: "",
             urgency: "",
@@ -43,7 +42,7 @@ function App() {
 
         setTasks(newTaskList);
 
-        // saveTasks(newTaskList);
+        saveTasks(newTaskList);
     }
 
     function deleteTask(taskId) {
@@ -53,7 +52,7 @@ function App() {
         
         setTasks(filteredTasks);
 
-        // deleteTasks(taskId);
+        deleteTasks(taskId);
     }
 
     function moveTask(id, newStatus) {
@@ -72,11 +71,11 @@ function App() {
         setTasks(newTaskList);
 
         // verificar para trocar o status quando passar para outro método
-        // saveTasks(newTaskList);
+        saveTasks(newTaskList);
     }
 
     function saveTasks(tasks) {
-        // localStorage.setItem("tasks", JSON.stringify(tasks));
+        localStorage.setItem("tasks", JSON.stringify(tasks));
 
         for (const task of tasks) {
           axios.post('http://localhost:3000/lists', {
@@ -119,7 +118,7 @@ function App() {
             <div className="container Shadow">
               <main>
                   <div className="row">
-                    <div className="col-4">
+                    <div className="col-12 col-md-4 col-lg-4">
                       <section>                      
                           <Status 
                           tasks={tasks}
@@ -131,7 +130,7 @@ function App() {
                           />
                         </section>
                       </div>
-                      <div className="col-4">
+                      <div className="col-12 col-md-4 col-lg-4">
                         <section>
                           <Status 
                           tasks={tasks}
@@ -143,7 +142,7 @@ function App() {
                           />
                         </section>
                       </div>
-                      <div className="col-4">
+                      <div className="col-12 col-md-4 col-lg-4">
                         <section>
                           <Status 
                           tasks={tasks}
