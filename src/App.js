@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import Status from './components/Status/Status';
+import Menu from './components/Menu/Menu';
 
 function App() {
     const [tasks, setTasks] = React.useState([]);
@@ -18,12 +19,11 @@ function App() {
         if (lastTask !== undefined) {
           newTaskId = lastTask.id + 1;
         }
-
+        
         setTasks(tasks => [
           ...tasks,
           {
-            // arrumar id
-            id: 10,
+            id: newTaskId,
             title: "",
             description: "",
             urgency: "",
@@ -70,11 +70,11 @@ function App() {
         setTasks(newTaskList);
 
         // verificar para trocar o status quando passar para outro método
-        // saveTasks(newTaskList);
+        saveTasks(newTaskList);
     }
 
     function saveTasks(tasks) {
-        // localStorage.setItem("tasks", JSON.stringify(tasks));
+        localStorage.setItem("tasks", JSON.stringify(tasks));
 
         for (const task of tasks) {
           axios.post('http://localhost:3000/lists', {
@@ -113,35 +113,49 @@ function App() {
 
     return (
         <div>
-            <h1>Task Controller</h1>
-            <main>
-                <section>
-                    <Status 
-                    tasks={tasks}
-                    addEmptyTask={addEmptyTask}
-                    addTask={addTask}
-                    deleteTask={deleteTask}
-                    moveTask={moveTask}
-                    status="Backlog"
-                    />
-                    <Status 
-                    tasks={tasks}
-                    addEmptyTask={addEmptyTask}
-                    addTask={addTask}
-                    deleteTask={deleteTask}
-                    moveTask={moveTask}
-                    status="In Progress"
-                    />
-                    <Status 
-                    tasks={tasks}
-                    addEmptyTask={addEmptyTask}
-                    addTask={addTask}
-                    deleteTask={deleteTask}
-                    moveTask={moveTask}
-                    status="Done"
-                    />
-                </section>
-            </main>
+            <Menu />
+            <div className="container">
+              <main>
+                  <div className="row">
+                    <div className="col-12 col-md-4 col-lg-4">
+                      <section>                      
+                          <Status 
+                          tasks={tasks}
+                          addEmptyTask={addEmptyTask}
+                          addTask={addTask}
+                          deleteTask={deleteTask}
+                          moveTask={moveTask}
+                          status="Backlog"
+                          />
+                        </section>
+                      </div>
+                      <div className="col-12 col-md-4 col-lg-4">
+                        <section>
+                          <Status 
+                          tasks={tasks}
+                          addEmptyTask={addEmptyTask}
+                          addTask={addTask}
+                          deleteTask={deleteTask}
+                          moveTask={moveTask}
+                          status="In Progress"
+                          />
+                        </section>
+                      </div>
+                      <div className="col-12 col-md-4 col-lg-4">
+                        <section>
+                          <Status 
+                          tasks={tasks}
+                          addEmptyTask={addEmptyTask}
+                          addTask={addTask}
+                          deleteTask={deleteTask}
+                          moveTask={moveTask}
+                          status="Done"
+                          />
+                        </section>
+                      </div>
+                  </div>
+              </main>
+            </div>
         </div>
     );
 }

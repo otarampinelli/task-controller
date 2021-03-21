@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-export default function Task(props) {
-  const { addTask, deleteTask, moveTask, task } = props;
+import './style.css';
 
+export default function Task({ addTask, deleteTask, moveTask, task }) {
   const [urgencyLevel, setUrgencyLevel] = useState(task.urgency);
   const [collapsed, setCollapsed] = useState(task.isCollapsed);
   const [formAction, setFormAction] = useState("");
@@ -26,8 +26,7 @@ export default function Task(props) {
           status: task.status,
           isCollapsed: true
         };
-        
-        // todo daqui que vem o objeto para salvar
+
         addTask(newTask);
         setCollapsed(true);
       }
@@ -68,80 +67,103 @@ export default function Task(props) {
 
   return (
     <div className={`task ${collapsed ? "collapsedTask" : ""}`}>
-      <button onClick={handleMoveLeft} className="button moveTask">
-        &#171;
-      </button>
       <form onSubmit={handleSubmit} className={collapsed ? "collapsed" : ""}>
-        <input
+      <div className="form-group">
+      <input
           type="text"
-          className="title input"
+          className="form-control"
           name="title"
           placeholder="Enter Title"
           disabled={collapsed}
           defaultValue={task.title}
+          id="low"
         />
+      </div>
+      <div className="form-group">
         <textarea
           rows="2"
-          className="description input"
+          className="form-control"
           name="description"
+          disabled={collapsed}
           placeholder="Enter Description"
           defaultValue={task.description}
         />
-        <div className="urgencyLabels">
-          <label className={`low ${urgencyLevel === "low" ? "selected" : ""}`}>
-            <input
-              urgency="low"
-              onChange={setUrgency}
-              type="radio"
-              name="urgency"
-            />
-            low
-          </label>
-          <label
-            className={`medium ${urgencyLevel === "medium" ? "selected" : ""}`}
-          >
-            <input
-              urgency="medium"
-              onChange={setUrgency}
-              type="radio"
-              name="urgency"
-            />
-            medium
-          </label>
-          <label
-            className={`high ${urgencyLevel === "high" ? "selected" : ""}`}
-          >
-            <input
-              urgency="high"
-              onChange={setUrgency}
-              type="radio"
-              name="urgency"
-            />
-            high
-          </label>
+      </div>
+        <div className="container TaskButtons">
+          <div className="Status">
+            <div className="form-check form-check-inline UrgencyLabels">
+              <label className={`low ${urgencyLevel === "low" ? "selected" : ""}`}>
+                <input
+                  className="form-check-input"
+                  urgency="low"
+                  onChange={setUrgency}
+                  type="radio"
+                  name="urgency"
+                />
+                low
+              </label>
+            </div>
+            <div className="form-check form-check-inline UrgencyLabels">
+              <label
+                className={`medium ${urgencyLevel === "medium" ? "selected" : ""}`}
+              >
+                <input
+                  className="form-check-input"
+                  urgency="medium"
+                  onChange={setUrgency}
+                  type="radio"
+                  name="urgency"
+                />
+                medium
+              </label>
+              </div>
+            <div className="form-check form-check-inline UrgencyLabels">
+              <label
+                className={`high ${urgencyLevel === "high" ? "selected" : ""}`}
+              >
+                <input
+                  className="form-check-input"
+                  urgency="high"
+                  onChange={setUrgency}
+                  type="radio"
+                  name="urgency"
+                />
+                high
+              </label>
+            </div>
+          </div>
+          <div className="ButtonMove">
+            <button onClick={handleMoveLeft} className="btn btn-light MoveTask mr-1">
+              &#171;
+            </button>
+            <button onClick={handleMoveRight} className="btn btn-light MoveTask ml-1">
+              &#187;
+            </button>
+          </div>
+          <div className="ButtonSave">
+            <div className="form-group">
+              <button
+                onClick={() => {
+                  setFormAction("save");
+                }}
+                className="btn btn-primary mt-2"
+              >
+                {collapsed ? "Edit" : "Save Task"}
+              </button>
+              {!collapsed && (
+                <button
+                  onClick={() => {
+                    setFormAction("delete");
+                  }}
+                  className="btn btn-danger mt-2 ml-1"
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          </div>
         </div>
-        <button
-          onClick={() => {
-            setFormAction("save");
-          }}
-          className="button"
-        >
-          {collapsed ? "Edit" : "Save"}
-        </button>
-        {collapsed && (
-          <button
-            onClick={() => {
-              setFormAction("delete");
-            }}
-            className="button delete"
-          >
-            X
-          </button>
-        )}
       </form>
-      <button onClick={handleMoveRight} className="button moveTask">
-        &#187;
-      </button>
     </div>
   );
 }
