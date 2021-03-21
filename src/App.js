@@ -41,8 +41,7 @@ function App() {
 
         setTasks(newTaskList);
 
-        // alterar para salver no db.json
-        // saveTasks(newTaskList);
+        saveTasks(newTaskList);
     }
 
     function deleteTask(taskId) {
@@ -52,9 +51,7 @@ function App() {
         
         setTasks(filteredTasks);
 
-        // // alterar para deletar no db.json
         deleteTasks(taskId);
-        // saveTasks(filteredTasks);
     }
 
     function moveTask(id, newStatus) {
@@ -72,8 +69,8 @@ function App() {
 
         setTasks(newTaskList);
 
-
-        saveTasks(newTaskList);
+        // verificar para trocar o status quando passar para outro método
+        // saveTasks(newTaskList);
     }
 
     function saveTasks(tasks) {
