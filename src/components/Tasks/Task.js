@@ -27,8 +27,6 @@ export default function Task({ addTask, deleteTask, moveTask, task }) {
           isCollapsed: true
         };
 
-        console.log(newTask);
-      
         addTask(newTask);
         setCollapsed(true);
       }
@@ -86,6 +84,7 @@ export default function Task({ addTask, deleteTask, moveTask, task }) {
           rows="2"
           className="description input form-control"
           name="description"
+          disabled={collapsed}
           placeholder="Enter Description"
           defaultValue={task.description}
         />
