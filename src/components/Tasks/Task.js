@@ -68,77 +68,91 @@ export default function Task(props) {
 
   return (
     <div className={`task ${collapsed ? "collapsedTask" : ""}`}>
-      <button onClick={handleMoveLeft} className="button moveTask">
-        &#171;
-      </button>
       <form onSubmit={handleSubmit} className={collapsed ? "collapsed" : ""}>
-        <input
+      <div className="form-group">
+      <input
           type="text"
-          className="title input"
+          className="title input form-control"
           name="title"
           placeholder="Enter Title"
           disabled={collapsed}
           defaultValue={task.title}
+          id="low"
         />
+      </div>
+      <div className="form-group">
         <textarea
           rows="2"
-          className="description input"
+          className="description input form-control"
           name="description"
           placeholder="Enter Description"
           defaultValue={task.description}
         />
-        <div className="urgencyLabels">
-          <label className={`low ${urgencyLevel === "low" ? "selected" : ""}`}>
-            <input
-              urgency="low"
-              onChange={setUrgency}
-              type="radio"
-              name="urgency"
-            />
-            low
-          </label>
-          <label
-            className={`medium ${urgencyLevel === "medium" ? "selected" : ""}`}
-          >
-            <input
-              urgency="medium"
-              onChange={setUrgency}
-              type="radio"
-              name="urgency"
-            />
-            medium
-          </label>
-          <label
-            className={`high ${urgencyLevel === "high" ? "selected" : ""}`}
-          >
-            <input
-              urgency="high"
-              onChange={setUrgency}
-              type="radio"
-              name="urgency"
-            />
-            high
-          </label>
+      </div>
+        <div className="form-check form-check-inline urgencyLabels">
+            <label className={`low ${urgencyLevel === "low" ? "selected" : ""}`}>
+              <input
+                className="form-check-input"
+                urgency="low"
+                onChange={setUrgency}
+                type="radio"
+                name="urgency"
+              />
+              low
+            </label>
+          </div>
+          <div className="form-check form-check-inline urgencyLabels">
+            <label
+              className={`medium ${urgencyLevel === "medium" ? "selected" : ""}`}
+            >
+              <input
+                className="form-check-input"
+                urgency="medium"
+                onChange={setUrgency}
+                type="radio"
+                name="urgency"
+              />
+              medium
+            </label>
+          </div>
+          <div className="form-check form-check-inline urgencyLabels">
+            <label
+              className={`high ${urgencyLevel === "high" ? "selected" : ""}`}
+            >
+              <input
+                className="form-check-input"
+                urgency="high"
+                onChange={setUrgency}
+                type="radio"
+                name="urgency"
+              />
+              high
+            </label>
         </div>
-        <button
-          onClick={() => {
-            setFormAction("save");
-          }}
-          className="button"
-        >
-          {collapsed ? "Edit" : "Save"}
-        </button>
-        {collapsed && (
+        <div className="form-group">
           <button
             onClick={() => {
-              setFormAction("delete");
+              setFormAction("save");
             }}
-            className="button delete"
+            className="btn btn-primary button mr-1"
           >
-            X
+            {collapsed ? "Edit" : "Save"}
           </button>
-        )}
+          {collapsed && (
+            <button
+              onClick={() => {
+                setFormAction("delete");
+              }}
+              className="btn btn-danger button delete"
+            >
+              X
+            </button>
+          )}
+        </div>
       </form>
+      <button onClick={handleMoveLeft} className="button moveTask">
+        &#171;
+      </button>
       <button onClick={handleMoveRight} className="button moveTask">
         &#187;
       </button>

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import Status from './components/Status/Status';
+import Menu from './components/Menu/Menu';
 
 function App() {
     const [tasks, setTasks] = React.useState([]);
@@ -41,7 +42,7 @@ function App() {
 
         setTasks(newTaskList);
 
-        saveTasks(newTaskList);
+        // saveTasks(newTaskList);
     }
 
     function deleteTask(taskId) {
@@ -51,7 +52,7 @@ function App() {
         
         setTasks(filteredTasks);
 
-        deleteTasks(taskId);
+        // deleteTasks(taskId);
     }
 
     function moveTask(id, newStatus) {
@@ -113,35 +114,49 @@ function App() {
 
     return (
         <div>
-            <h1>Task Controller</h1>
-            <main>
-                <section>
-                    <Status 
-                    tasks={tasks}
-                    addEmptyTask={addEmptyTask}
-                    addTask={addTask}
-                    deleteTask={deleteTask}
-                    moveTask={moveTask}
-                    status="Backlog"
-                    />
-                    <Status 
-                    tasks={tasks}
-                    addEmptyTask={addEmptyTask}
-                    addTask={addTask}
-                    deleteTask={deleteTask}
-                    moveTask={moveTask}
-                    status="In Progress"
-                    />
-                    <Status 
-                    tasks={tasks}
-                    addEmptyTask={addEmptyTask}
-                    addTask={addTask}
-                    deleteTask={deleteTask}
-                    moveTask={moveTask}
-                    status="Done"
-                    />
-                </section>
-            </main>
+            <Menu />
+            <div className="container bg-light shadow">
+              <main>
+                  <div className="row">
+                    <div className="col-4">
+                      <section>                      
+                          <Status 
+                          tasks={tasks}
+                          addEmptyTask={addEmptyTask}
+                          addTask={addTask}
+                          deleteTask={deleteTask}
+                          moveTask={moveTask}
+                          status="Backlog"
+                          />
+                        </section>
+                      </div>
+                      <div className="col-4">
+                        <section>
+                          <Status 
+                          tasks={tasks}
+                          addEmptyTask={addEmptyTask}
+                          addTask={addTask}
+                          deleteTask={deleteTask}
+                          moveTask={moveTask}
+                          status="In Progress"
+                          />
+                        </section>
+                      </div>
+                      <div className="col-4">
+                        <section>
+                          <Status 
+                          tasks={tasks}
+                          addEmptyTask={addEmptyTask}
+                          addTask={addTask}
+                          deleteTask={deleteTask}
+                          moveTask={moveTask}
+                          status="Done"
+                          />
+                        </section>
+                      </div>
+                  </div>
+              </main>
+            </div>
         </div>
     );
 }
