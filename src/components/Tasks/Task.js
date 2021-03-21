@@ -130,6 +130,14 @@ export default function Task(props) {
             </label>
         </div>
         <div className="form-group">
+          <button onClick={handleMoveLeft} className="button moveTask">
+            &#171;
+          </button>
+          <button onClick={handleMoveRight} className="button moveTask">
+            &#187;
+          </button>
+        </div>
+        <div className="form-group">
           <button
             onClick={() => {
               setFormAction("save");
@@ -150,12 +158,6 @@ export default function Task(props) {
           )}
         </div>
       </form>
-      <button onClick={handleMoveLeft} className="button moveTask">
-        &#171;
-      </button>
-      <button onClick={handleMoveRight} className="button moveTask">
-        &#187;
-      </button>
     </div>
   );
 }

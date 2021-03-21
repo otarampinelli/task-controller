@@ -1,6 +1,7 @@
 import React from "react";
 
 import Task from "../Tasks/Task";
+import './style.css';
 
 export default function Status(props) {
   const { status, tasks, addTask, deleteTask, addEmptyTask, moveTask } = props;
@@ -32,12 +33,14 @@ export default function Status(props) {
   }
 
   return (
-    <div className="statusLine">
+    <div className={`container mt-3 mb-3 pt-3 pb-3 StatusLine ${status === 'In Progress' ? 'InProgress' : status}`}>
       <h3>{status}</h3>
       {taskList}
-      <button onClick={handleAddEmpty} className="button addTask">
-        +
-      </button>
+      <div className="TaskButton">
+        <button onClick={handleAddEmpty} className="btn mt-2 btn-primary button AddTask">
+          Add
+        </button>
+      </div>
     </div>
   );
 }
