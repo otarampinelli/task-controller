@@ -71,7 +71,7 @@ export default function Task({ addTask, deleteTask, moveTask, task }) {
       <div className="form-group">
       <input
           type="text"
-          className="title input form-control"
+          className="form-control"
           name="title"
           placeholder="Enter Title"
           disabled={collapsed}
@@ -82,7 +82,7 @@ export default function Task({ addTask, deleteTask, moveTask, task }) {
       <div className="form-group">
         <textarea
           rows="2"
-          className="description input form-control"
+          className="form-control"
           name="description"
           disabled={collapsed}
           placeholder="Enter Description"

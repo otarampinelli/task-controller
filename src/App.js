@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import Status from './components/Status/Status';
 import Menu from './components/Menu/Menu';
-import './style.css';
 
 function App() {
     const [tasks, setTasks] = React.useState([]);
@@ -115,7 +114,7 @@ function App() {
     return (
         <div>
             <Menu />
-            <div className="container Shadow">
+            <div className="container">
               <main>
                   <div className="row">
                     <div className="col-12 col-md-4 col-lg-4">

@@ -36,7 +36,7 @@ export default function Status({ status, tasks, addTask, deleteTask, addEmptyTas
       {taskList}
       <div className="TaskButton">
         <div className="NewTaskButton">
-          <button onClick={handleAddEmpty} className="btn mt-2 btn-primary button AddTask">
+          <button onClick={handleAddEmpty} className="btn mt-2 btn-primary AddTask">
             New Task
           </button>
         </div>
