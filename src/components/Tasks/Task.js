@@ -2,9 +2,7 @@ import { useState } from "react";
 
 import './style.css';
 
-export default function Task(props) {
-  const { addTask, deleteTask, moveTask, task } = props;
-
+export default function Task({ addTask, deleteTask, moveTask, task }) {
   const [urgencyLevel, setUrgencyLevel] = useState(task.urgency);
   const [collapsed, setCollapsed] = useState(task.isCollapsed);
   const [formAction, setFormAction] = useState("");
@@ -28,8 +26,9 @@ export default function Task(props) {
           status: task.status,
           isCollapsed: true
         };
-        
-        // todo daqui que vem o objeto para salvar
+
+        console.log(newTask);
+      
         addTask(newTask);
         setCollapsed(true);
       }
@@ -152,7 +151,7 @@ export default function Task(props) {
               >
                 {collapsed ? "Edit" : "Save Task"}
               </button>
-              {collapsed && (
+              {!collapsed && (
                 <button
                   onClick={() => {
                     setFormAction("delete");

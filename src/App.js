@@ -20,11 +20,11 @@ function App() {
         if (lastTask !== undefined) {
           newTaskId = lastTask.id + 1;
         }
-
+        
         setTasks(tasks => [
           ...tasks,
           {
-            id: newTaskId.id,
+            id: newTaskId,
             title: "",
             description: "",
             urgency: "",

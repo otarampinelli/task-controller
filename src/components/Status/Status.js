@@ -3,9 +3,7 @@ import React from "react";
 import Task from "../Tasks/Task";
 import './style.css';
 
-export default function Status(props) {
-  const { status, tasks, addTask, deleteTask, addEmptyTask, moveTask } = props;
-
+export default function Status({ status, tasks, addTask, deleteTask, addEmptyTask, moveTask }) {
   let taskList, tasksForStatus;
 
   function handleAddEmpty() {
