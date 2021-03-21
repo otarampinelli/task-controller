@@ -1,10 +1,12 @@
-.Status, .ButtonMove, .ButtonSave {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center
+.Status,
+.ButtonMove,
+.ButtonSave {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .MoveTask {
-    font-weight: bold;
+  font-weight: bold;
 }
