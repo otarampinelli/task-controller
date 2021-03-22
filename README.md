@@ -16,7 +16,7 @@ Clone o repositório:
 
 $ git clone https://github.com/otarampinelli/task-controller.git
 
-Rodo o comando npm install na raiz do projeto:
+Rode o comando npm install na raiz do projeto para instalar as dependências:
 
 $ npm install
 
