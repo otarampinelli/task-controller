@@ -8,8 +8,7 @@ function App() {
     const [tasks, setTasks] = React.useState([]);
 
     React.useEffect(() => {
-        console.log("using effect")
-        loadTasks()
+        loadTasks();
     }, [])
 
     function addEmptyTask(status) {
@@ -66,32 +65,47 @@ function App() {
         task.status = newStatus;
 
         let newTaskList = [...filteredTasks, task];
-
+        
         setTasks(newTaskList);
 
-        // verificar para trocar o status quando passar para outro método
-        saveTasks(newTaskList);
+        // Add method to update status on db.json
+
     }
 
     function saveTasks(tasks) {
+        // remove this localStorage - usage for inital developement
         localStorage.setItem("tasks", JSON.stringify(tasks));
-
+      
         for (const task of tasks) {
-          axios.post('http://localhost:3000/lists', {
-            // verificar e corrigir erro do id
-            id: task.id,
-            title: task.title
-          }).then(response => {
-            console.log(response);
-          })
+          const idTitle = searchId(task.id);
+          idTitle.then(response => {
+            if (task.id !== response) {
+              axios.post('http://localhost:3000/lists', {
+              id: task.id,
+              title: task.title
+            }).then(response => {
+              console.log(response);
+            })
 
-          axios.post('http://localhost:3000/tasks', {
-            listId: task.id,
-            title: task.description
-          }).then(response => {
-            console.log(response);
+            axios.post('http://localhost:3000/tasks', {
+              listId: task.id,
+              title: task.description,
+              urgency: task.urgency,  
+              status: task.status
+            }).then(response => {
+              console.log(response);
+            })  
+            }
           })
         }
+    }
+
+    async function searchId(taskId) {
+      return axios.get(`http://localhost:3000/lists/${taskId}`).then(response => {
+        return response.data.id;
+      }).catch(err => {
+        console.log(err);
+      });
     }
 
     function deleteTasks(tasksId) {
@@ -100,8 +114,8 @@ function App() {
       })
     }
 
-
     function loadTasks() {
+        // change to load data from db.json
         let loadedTasks = localStorage.getItem("tasks");
 
         let tasks = JSON.parse(loadedTasks);
